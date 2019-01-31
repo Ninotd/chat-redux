@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Message } from '../components/message';
 import { fetchMessages } from '../actions/index';
+import MessageForm from '../containers/message_form';
 
 class MessageList extends Component {
   componentWillMount() {
@@ -38,6 +39,7 @@ class MessageList extends Component {
             })
           }
         </div>
+        <MessageForm />
       </div>
     );
   }

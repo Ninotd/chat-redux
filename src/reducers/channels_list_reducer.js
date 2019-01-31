@@ -6,6 +6,7 @@ export default function(state = null, action) {
       return action.payload;
     }
     default: {
+      console.log("lol")
       return state;
     }
   }
