@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { selectChannel, fetchMessages } from '../actions/index';
 
 class ChannelList extends Component {
   // un moyen de sortir le truc super compliqué du map ailleurs
 
-  handleClick = (channel) => {
-    // call action
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedChannel !== this.props.selectedChannel) {
+      this.props.fetchMessages(nextProps.selectedChannel);
+    }
   }
 
+  handleClick = (channel) => {
+    this.props.selectChannel(channel);
+  }
 
   renderChannel = (channel) => {
     return (
@@ -19,20 +24,33 @@ class ChannelList extends Component {
         onClick={() => this.handleClick(channel)}
         role="presentation"
       >
-      #{channel}
+        #{channel}
       </li>
     );
   }
 
-
-  renderList() {
+  render() {
     return (
       <div className="channels-container">
+        <span>Redux Chat</span>
         <ul>
-          {this.props.channels.maps(this.renderChannel)}
+          {this.props.channels.map(this.renderChannel)}
         </ul>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    channels: state.channels,
+    selectedChannel: state.selectedChannel
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ selectChannel, fetchMessages }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);
 

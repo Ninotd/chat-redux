@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { ChannelList } from '../containers/channel_list';
-import { MessageList } from '../containers/message_list';
+import ChannelList from '../containers/channel_list';
+import MessageList from '../containers/message_list';
 
 
 const App = () => {
