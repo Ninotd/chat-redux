@@ -6,6 +6,7 @@ export default function(state = null, action) {
       return action.payload.messages;
     }
     case MESSAGE_POSTED: {
+      console.log(state);
       const copiedState = state.slice(0);
       copiedState.push(action.payload);
       return copiedState;
